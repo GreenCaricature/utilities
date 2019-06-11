@@ -1,5 +1,3 @@
-//will not deep copy functions, assumes object input
-
 // ECMA 3 safe version
 function deepCopy(object) {
   var key, new_copy;
