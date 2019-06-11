@@ -1,6 +1,6 @@
 //will not deep copy functions
 
-// ECMA 3 version
+// ECMA 3 safe version
 function deepCopy(object) {
   var key, new_copy;
   if (Object.prototype.toString.call(object).indexOf("Array") === -1) {
