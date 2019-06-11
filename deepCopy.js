@@ -23,7 +23,7 @@ function deepCopy(object) {
 // post ECMA 3 version
 function deepCopy(object) {
 	var copy = Array.isArray(object) ? [] : {};
-	for (let key in object) {
+		for (let key in object) {
 		if (typeof object[key] === "object" && object[key] !== null) {
 			copy[key] = deepCopy(object[key]);
 		} else {
