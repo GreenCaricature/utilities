@@ -1,6 +1,8 @@
 //will not deep copy functions
+
+// ECMA 3 version
 function deepCopy(object) {
-  var param, key, new_copy;
+  var key, new_copy;
   if (Object.prototype.toString.call(object).indexOf("Array") === -1) {
     new_copy = {};
   } else {
@@ -15,4 +17,18 @@ function deepCopy(object) {
     }
   }
   return new_copy;
+}
+
+
+// post ECMA 3 version
+function deepCopy(object) {
+	var copy = Array.isArray(object) ? [] : {};
+	for (let key in object) {
+		if (typeof object[key] === "object" && object[key] !== null) {
+			copy[key] = deepCopy(object[key]);
+		} else {
+			copy[key] = object[key];
+		}	
+	}
+	return copy;
 }
