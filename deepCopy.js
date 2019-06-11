@@ -19,16 +19,15 @@ function deepCopy(object) {
   return new_copy;
 }
 
-
 // post ECMA 3 version
 function deepCopy(object) {
-	var copy = Array.isArray(object) ? [] : {};
-	for (let key in object) {
-		if (typeof object[key] === "object" && object[key] !== null) {
-			copy[key] = deepCopy(object[key]);
-		} else {
-			copy[key] = object[key];
-		}	
-	}
-	return copy;
+  var copy = Array.isArray(object) ? [] : {};
+  for (let key in object) {
+    if (typeof object[key] === "object" && object[key] !== null) {
+      copy[key] = deepCopy(object[key]);
+    } else {
+      copy[key] = object[key];
+    } 
+  }
+  return copy;
 }
