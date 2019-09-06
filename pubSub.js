@@ -1,4 +1,4 @@
-var pubSub = window.utag["tealiumPubSub"] || {
+var pubSub = window.pubSub || {
   events : {},
   // magic number as baseline for subscription IDs
   subscription_id_iterator : 0,
@@ -8,7 +8,7 @@ var pubSub = window.utag["tealiumPubSub"] || {
     if (pubSub.events[event].has_published) {
       callback();
     } else {
-      subscription_id = utag.tealiumPubSub.subscription_id_iterator++;
+      subscription_id = pubSub.subscription_id_iterator++;
       pubSub.events[event].subscriptions.push({callback : callback, subscription_id : subscription_id});
     }
     return subscription_id;
@@ -16,7 +16,7 @@ var pubSub = window.utag["tealiumPubSub"] || {
   publish : function (event) {
     var subscription;
     pubSub.events[event] = pubSub.events[event] || {subscriptions:[],has_published:false};
-    if (!utag.tealiumPubSub.events[event].has_published) {
+    if (!pubSub.events[event].has_published) {
       pubSub.events[event].has_published = true;
       // if there are pre-existing subscriptions, invoke their callbacks
       if (pubSub.events[event].subscriptions.length > 0) {
@@ -32,7 +32,7 @@ var pubSub = window.utag["tealiumPubSub"] || {
     var entry, i;
     for (entry in pubSub.events) {
       if (pubSub.events.hasOwnProperty(entry)) {
-        for (i = 0; i < utag.tealiumPubSub.events[entry].subscriptions.length; i++) {
+        for (i = 0; i < pubSub.events[entry].subscriptions.length; i++) {
           //removes the subscription by its id
           if (subscription_id === pubSub.events[entry].subscriptions[i].subscription_id) {
             pubSub.events[entry].subscriptions.splice(i,1);
